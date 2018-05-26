@@ -11,6 +11,7 @@ namespace software_reeingneering_clustering.Cluster
         List<INode> Childs { get; }
         string Name { get; set; }
         List<INode> Methods { get; }
+        NodeType ImageType { get; }
         void Add(INode child);
         void AddRange(IEnumerable<INode> childs);
     }
