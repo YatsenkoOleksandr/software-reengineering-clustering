@@ -22,7 +22,7 @@ namespace software_reeingneering_clustering.Cluster
             _childs = methods;
         }
 
-        public Cluster(string name, Cluster left, Cluster right)
+        public Cluster(string name, INode left, INode right)
         {
             Name = name;
             _childs.Add(left);
