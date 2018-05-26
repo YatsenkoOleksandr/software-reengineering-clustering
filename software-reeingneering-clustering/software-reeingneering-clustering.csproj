@@ -46,7 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AgglomerativeHierarchical\AgglomerativeHierarchicalClustering.cs" />
-    <Compile Include="Cluster\Cluster.cs" />
+    <Compile Include="Cluster\Node.cs" />
     <Compile Include="Cluster\IClustering.cs" />
     <Compile Include="Cluster\INode.cs" />
     <Compile Include="Cluster\Method.cs" />

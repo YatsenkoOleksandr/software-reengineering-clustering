@@ -8,6 +8,6 @@ namespace software_reeingneering_clustering.Cluster
 {
     interface IClustering
     {
-        List<INode> Cluster(List<INode> rawData);
+        List<INode> Clusterize(List<INode> rawData);
     }
 }

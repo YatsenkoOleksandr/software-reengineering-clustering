@@ -16,9 +16,9 @@ namespace software_reeingneering_clustering.ClassEntities
         // "class name"->"method name"
         private const string CLASSMETHOD_REGEX_STRING = NAME_REGEX_STRING + "->" + NAME_REGEX_STRING;
 
-        public static Dictionary<string, IList<string>> ReadClassEntities(string filename)
+        public static Dictionary<string, List<string>> ReadClassEntities(string filename)
         {
-            Dictionary<string, IList<string>> classes = new Dictionary<string, IList<string>>();
+            Dictionary<string, List<string>> classes = new Dictionary<string, List<string>>();
 
             Regex classMethodRelationRegex = new Regex(CLASSMETHOD_REGEX_STRING);
             Regex nameRegex = new Regex(NAME_REGEX_STRING);

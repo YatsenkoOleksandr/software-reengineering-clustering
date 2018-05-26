@@ -9,19 +9,41 @@ namespace software_reeingneering_clustering.AgglomerativeHierarchical
 {
     class AgglomerativeHierarchicalClustering : IClustering
     {
-        public List<INode> Cluster(List<INode> rawData)
+        public List<INode> Clusterize(List<INode> rawData)
         {
-            throw new NotImplementedException();
+            List<INode> clusteredList = rawData;
+            int counter = 1;
+
+            bool clusterStepSucceed = true;
+
+            while(clusteredList.Count > 1 && clusterStepSucceed)
+            {
+                clusterStepSucceed = ClusteringStep(clusteredList, ref counter);
+            }
+
+            return clusteredList;
         }
 
-        private double JaccardCoefficient(INode node1, INode node2)
+        private double JaccardCoefficient(INode firstNode, INode secondNode)
         {
+            IEnumerable<string> firstMethods = firstNode.Methods.Select(m => m.Name);
+            IEnumerable<string> secondMethods = secondNode.Methods.Select(m => m.Name);
+            
+            IEnumerable<string> commonMethods = firstMethods.Intersect(secondMethods);
+            double commonMethodsCount = commonMethods.Count();
 
+            IEnumerable<string> firstUniqueMethods = firstMethods.Except(commonMethods);
+            double firstUniqueMethodsCount = firstUniqueMethods.Count();
 
-            return 0;
+            IEnumerable<string> secondUniqueMethods = secondMethods.Except(commonMethods);
+            double secondUniqueMethodsCount = secondUniqueMethods.Count();
+
+            double coef = commonMethodsCount / (commonMethodsCount + firstUniqueMethodsCount + secondUniqueMethodsCount);
+
+            return coef;
         }
 
-        private bool ClusterStep(List<INode> data, ref int clusterCounter)
+        private bool ClusteringStep(List<INode> data, ref int clusterCounter)
         {
             double[,] distances = new double[data.Count, data.Count];
 
@@ -31,7 +53,7 @@ namespace software_reeingneering_clustering.AgglomerativeHierarchical
 
             for(int i = 0; i < data.Count; i++)
             {
-                for(int j = 0; j < data.Count; j++)
+                for(int j = i; j < data.Count; j++)
                 {
                     if (i != j)
                     {
@@ -60,7 +82,7 @@ namespace software_reeingneering_clustering.AgglomerativeHierarchical
             string clusterName = "Cluster #" + clusterCounter++;
 
             // Join clusters and remove them from list
-            INode joinedNode = new Cluster.Cluster(clusterName, firstNode, secondNode);
+            INode joinedNode = new Node(clusterName, firstNode, secondNode);
             data.RemoveAt(firstNodeToJoinIndex);
             if (firstNodeToJoinIndex < secondNodeToJoinIndex)
             {

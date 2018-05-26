@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using software_reeingneering_clustering.Cluster;
+using software_reeingneering_clustering.AgglomerativeHierarchical;
 
 namespace software_reeingneering_clustering
 {
@@ -26,8 +27,34 @@ namespace software_reeingneering_clustering
             {
                 string inputfile = openClassMethodsFile.FileName;
 
-                Dictionary<string, IList<string>> classes = ClassParser.ReadClassEntities(inputfile);
+                Dictionary<string, List<string>> rawClasses = ClassParser.ReadClassEntities(inputfile);
+
+                List<INode> clusters = initializeClusters(rawClasses);
+
+                IClustering clustering = new AgglomerativeHierarchicalClustering();
+                List<INode> clustered = clustering.Clusterize(clusters);
+
+                ReloadTree(clustered[0]);
             }
+        }
+
+        private List<INode> initializeClusters(Dictionary<string, List<string>> rawClasses)
+        {
+            List<INode> clusters = new List<INode>();
+
+            foreach(var className in rawClasses.Keys)
+            {
+                List<INode> methodNodes = new List<INode>();
+                foreach(var methodName in rawClasses[className])
+                {
+                    methodNodes.Add(new Method(methodName));
+                }
+
+                Node classCluster = new Node(className, methodNodes);
+                clusters.Add(classCluster);
+            }
+
+            return clusters;
         }
 
         private void ReloadTree(INode root)
@@ -41,16 +68,21 @@ namespace software_reeingneering_clustering
             var node = new TreeNode(rootNode.Name);
             node.ImageIndex = (int)rootNode.ImageType;
             node.SelectedImageIndex = (int)rootNode.ImageType;
-            node.Nodes.AddRange(rootNode.Methods.Select(x =>
+            if (rootNode.ImageType == NodeType.Class)
             {
-                var res = new TreeNode(x.Name);
-                res.ImageIndex = (int)x.ImageType;
-                res.SelectedImageIndex = (int)x.ImageType;
-                return res;
-            }).ToArray());
-
-            foreach (var children in rootNode.Childs)
-                node.Nodes.Add(GetTreeNode(children));
+                node.Nodes.AddRange(rootNode.Methods.Select(x =>
+                {
+                    var res = new TreeNode(x.Name);
+                    res.ImageIndex = (int)x.ImageType;
+                    res.SelectedImageIndex = (int)x.ImageType;
+                    return res;
+                }).ToArray());
+            }
+            else
+            {
+                foreach (var children in rootNode.Childs)
+                    node.Nodes.Add(GetTreeNode(children));
+            }
 
             return node;
         }
