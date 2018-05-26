@@ -11,6 +11,8 @@ namespace software_reeingneering_clustering.Cluster
         public List<INode> Childs => new List<INode>();
         public string Name { get; set; }
         public List<INode> Methods { get; }
+        public void Add(INode child) { }
+        public void AddRange(IEnumerable<INode> childs) { }
 
         public Method(string name)
         {

@@ -14,7 +14,17 @@ namespace software_reeingneering_clustering.Cluster
 
         public string Name { get; set; }
 
-        public List<INode> Methods => Childs.Where(node => node is Method).ToList();
+        public List<INode> Methods => _childs.Where(node => node is Method).ToList();
+
+        public void Add(INode child)
+        {
+            _childs.Add(child);
+        }
+
+        public void AddRange(IEnumerable<INode> childs)
+        {
+            _childs.AddRange(childs);
+        }
 
         public Cluster(string name, List<INode> methods)
         {
