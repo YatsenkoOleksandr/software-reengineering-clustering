@@ -1,0 +1,49 @@
+getta($1);
+
+// Create empty edge set
+classMethods = eset;
+
+// Get set of methods
+methods = $INSTANCE . {"$M"};
+
+// Get parent labels: relation "method" -> "class label"
+parentNames = inv contain * @label;
+
+// Get relation that contains method, name, class name: "class name" -> method -> "method name"
+methodsFullNames = inv parentNames ** @label;
+
+for m in methods
+{	
+	// Get current tuple
+	fullName_tuple = methodsFullNames [&1 == m];
+	
+	// Get class name sting
+	className = fullName_tuple [&0];
+	classNameString = pick(className);
+	
+	// Get method name string
+	methodName = fullName_tuple [&2];
+	methodNameString = pick(methodName);
+	
+	// Form full name string
+	fullNameString = classNameString + "." + methodNameString;
+	
+	// Add to edge set new relation
+	classMethods = classMethods + {classNameString} X {methodNameString};
+}
+
+"   System classes:";
+
+systemClasses = classMethods [&0 =~ "java.*"];
+
+systemClasses;
+
+"   Class methods:"
+
+classMethods = classMethods - systemClasses;
+
+classMethods;
+
+writeDot($2, classMethods);
+
+
