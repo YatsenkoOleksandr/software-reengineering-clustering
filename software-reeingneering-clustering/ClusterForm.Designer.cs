@@ -40,7 +40,7 @@
             // clusterButton
             // 
             this.clusterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.clusterButton.Location = new System.Drawing.Point(625, 551);
+            this.clusterButton.Location = new System.Drawing.Point(648, 600);
             this.clusterButton.Name = "clusterButton";
             this.clusterButton.Size = new System.Drawing.Size(75, 23);
             this.clusterButton.TabIndex = 0;
@@ -62,7 +62,7 @@
             this.trvResultTree.Location = new System.Drawing.Point(12, 12);
             this.trvResultTree.Name = "trvResultTree";
             this.trvResultTree.SelectedImageIndex = 0;
-            this.trvResultTree.Size = new System.Drawing.Size(278, 562);
+            this.trvResultTree.Size = new System.Drawing.Size(711, 565);
             this.trvResultTree.TabIndex = 1;
             // 
             // imageList1
@@ -77,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 586);
+            this.ClientSize = new System.Drawing.Size(735, 635);
             this.Controls.Add(this.trvResultTree);
             this.Controls.Add(this.clusterButton);
             this.Name = "ClusterForm";
