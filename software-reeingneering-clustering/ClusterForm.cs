@@ -38,8 +38,16 @@ namespace software_reeingneering_clustering
 
         private TreeNode GetTreeNode(INode rootNode)
         {
-            var node = new TreeNode(rootNode.Name);         
-            node.Nodes.AddRange(rootNode.Methods.Select(x => new TreeNode(x.Name)).ToArray());
+            var node = new TreeNode(rootNode.Name);
+            node.ImageIndex = (int)rootNode.ImageType;
+            node.SelectedImageIndex = (int)rootNode.ImageType;
+            node.Nodes.AddRange(rootNode.Methods.Select(x =>
+            {
+                var res = new TreeNode(x.Name);
+                res.ImageIndex = (int)x.ImageType;
+                res.SelectedImageIndex = (int)x.ImageType;
+                return res;
+            }).ToArray());
 
             foreach (var children in rootNode.Childs)
                 node.Nodes.Add(GetTreeNode(children));

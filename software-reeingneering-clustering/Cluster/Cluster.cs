@@ -11,10 +11,9 @@ namespace software_reeingneering_clustering.Cluster
         private List<INode> _childs = new List<INode>();
 
         public List<INode> Childs => _childs.Where(node => node is Cluster).ToList();// _childs.Where(node => node is Cluster).ToList()
-
         public string Name { get; set; }
-
         public List<INode> Methods => _childs.Where(node => node is Method).ToList();
+        public NodeType ImageType => Childs.Count == 0 ? NodeType.Class : NodeType.Folder;
 
         public void Add(INode child)
         {
