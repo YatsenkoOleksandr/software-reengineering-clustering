@@ -12,6 +12,7 @@ namespace software_reeingneering_clustering.Cluster
         public string Name { get; set; }
         public List<INode> Methods { get; }
         public NodeType ImageType => NodeType.Method;
+        public int ClusterId { get; set; }
 
         public void Add(INode child) { }
         public void AddRange(IEnumerable<INode> childs) { }

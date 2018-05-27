@@ -50,7 +50,9 @@
     <Compile Include="Cluster\IClustering.cs" />
     <Compile Include="Cluster\INode.cs" />
     <Compile Include="Cluster\Method.cs" />
+    <Compile Include="Cluster\NodeSimilarity.cs" />
     <Compile Include="Cluster\NodeType.cs" />
+    <Compile Include="KMeans\KMeansClustering.cs" />
     <Compile Include="Parser\ClassParser.cs" />
     <Compile Include="ClusterForm.cs">
       <SubType>Form</SubType>

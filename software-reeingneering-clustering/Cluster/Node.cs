@@ -32,6 +32,9 @@ namespace software_reeingneering_clustering.Cluster
 
         public NodeType ImageType { get; }
 
+        // For "Folder" - id of folder, for "Class" -> id of parent folder
+        public int ClusterId { get; set; }
+
         public void Add(INode child)
         {
             _childs.Add(child);
@@ -55,6 +58,13 @@ namespace software_reeingneering_clustering.Cluster
             ImageType = NodeType.Folder;
             _childs.Add(left);
             _childs.Add(right);
+        }
+
+        public Node(string name, int clusterId)
+        {
+            Name = name;
+            ClusterId = clusterId;
+            ImageType = NodeType.Folder;
         }
     }
 }

@@ -14,5 +14,6 @@ namespace software_reeingneering_clustering.Cluster
         NodeType ImageType { get; }
         void Add(INode child);
         void AddRange(IEnumerable<INode> childs);
+        int ClusterId { get; set; }
     }
 }

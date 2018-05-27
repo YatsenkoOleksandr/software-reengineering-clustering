@@ -23,20 +23,13 @@ for m in methods
 	
 	// Get method name string
 	methodName = fullName_tuple [&2];
-	methodNameString = pick(methodName);
-	
-	// Form full name string
-	fullNameString = classNameString + "." + methodNameString;
+	methodNameString = pick(methodName);	
 	
 	// Add to edge set new relation
 	classMethods = classMethods + {classNameString} X {methodNameString};
 }
 
-"   System classes:";
-
 systemClasses = classMethods [&0 =~ "java.*"];
-
-systemClasses;
 
 "   Class methods:"
 
