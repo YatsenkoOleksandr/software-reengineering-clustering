@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using software_reeingneering_clustering.Cluster;
 using software_reeingneering_clustering.AgglomerativeHierarchical;
+using software_reeingneering_clustering.KMeans;
 
 namespace software_reeingneering_clustering
 {
@@ -31,7 +32,10 @@ namespace software_reeingneering_clustering
 
                 List<INode> clusters = initializeClusters(rawClasses);
 
-                IClustering clustering = new AgglomerativeHierarchicalClustering();
+                //IClustering clustering = new AgglomerativeHierarchicalClustering();
+
+                IClustering clustering = new KMeansClustering(5);
+
                 List<INode> clustered = clustering.Clusterize(clusters);
 
                 ReloadTree(clustered[0]);

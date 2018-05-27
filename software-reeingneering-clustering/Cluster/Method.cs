@@ -16,6 +16,7 @@ namespace software_reeingneering_clustering.Cluster
 
         public void Add(INode child) { }
         public void AddRange(IEnumerable<INode> childs) { }
+        public void RemoveChildByName(string name) { }
 
         public Method(string name)
         {

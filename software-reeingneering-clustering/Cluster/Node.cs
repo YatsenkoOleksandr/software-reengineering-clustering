@@ -45,6 +45,15 @@ namespace software_reeingneering_clustering.Cluster
             _childs.AddRange(childs);
         }
 
+        public void RemoveChildByName(string name)
+        {
+            int indexToRemove = _childs.FindIndex(child => child.Name == name);
+            if (indexToRemove > -1)
+            {
+                _childs.RemoveAt(indexToRemove);
+            }
+        }
+
         public Node(string name, List<INode> methods)
         {
             Name = name;
@@ -65,6 +74,12 @@ namespace software_reeingneering_clustering.Cluster
             Name = name;
             ClusterId = clusterId;
             ImageType = NodeType.Folder;
+        }
+
+        public Node(string name, NodeType nodeType)
+        {
+            Name = name;
+            ImageType = nodeType;
         }
     }
 }

@@ -33,7 +33,13 @@ namespace software_reeingneering_clustering.KMeans
                 changed = CalculateClusterMembership(clusters, rawData);
             }
 
-            return clusters;
+            INode rootCluster = new Node("Cluster #" + ClusterNumber, NodeType.Folder);
+            rootCluster.AddRange(clusters);
+
+            List<INode> result = new List<INode>();
+            result.Add(rootCluster);
+
+            return result;
         }
 
         private List<INode> InitializeCentroids(List<INode> rawData)
@@ -43,7 +49,8 @@ namespace software_reeingneering_clustering.KMeans
             // Create k-clusters
             for(int i = 0; i < ClusterNumber; i++)
             {
-                Node centroidCluster = new Node("Cluster #" + i, i); 
+                Node centroidCluster = new Node("Cluster #" + i, i);
+                centroids.Add(centroidCluster);
             }
 
             for (int i = 0; i < rawData.Count; i++)
@@ -65,7 +72,7 @@ namespace software_reeingneering_clustering.KMeans
                 rawData[i].ClusterId = centroidId;
 
                 // Move class to one of the clusters
-                centroids[centroidId].Childs.Add(classNode);
+                centroids[centroidId].Add(classNode);
             }
             return centroids;
         }
@@ -95,8 +102,8 @@ namespace software_reeingneering_clustering.KMeans
                     // Move class to another cluster if it is required
                     if (oldClusterId != newClusterId)
                     {
-                        clusters[newClusterId].Childs.Add(classInCluster);
-                        clusters[oldClusterId].Childs.RemoveAt(classInClusterIndex);
+                        clusters[newClusterId].Add(classInCluster);
+                        clusters[oldClusterId].RemoveChildByName(classes[i].Name);
                     }
                     break;
                 }
@@ -111,7 +118,7 @@ namespace software_reeingneering_clustering.KMeans
             for(int i = 0; i < classes.Count; i++)
             {
                 int newClusterId = -1;
-                int min_distance = -1;
+                double min_distance = -1;
                 double distance = -1;
                 for (int k = 0; k < ClusterNumber; k++)
                 {
@@ -121,7 +128,7 @@ namespace software_reeingneering_clustering.KMeans
                     if (newClusterId == -1 || distance > min_distance)
                     {
                         newClusterId = k;
-                        distance = min_distance;
+                        min_distance = distance;
                     }
                 }
 
