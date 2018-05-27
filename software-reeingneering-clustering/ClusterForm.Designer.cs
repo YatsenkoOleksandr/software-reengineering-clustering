@@ -35,16 +35,20 @@
             this.saveResult = new System.Windows.Forms.SaveFileDialog();
             this.trvResultTree = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // clusterButton
             // 
             this.clusterButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.clusterButton.Location = new System.Drawing.Point(648, 600);
+            this.clusterButton.Location = new System.Drawing.Point(603, 543);
             this.clusterButton.Name = "clusterButton";
-            this.clusterButton.Size = new System.Drawing.Size(75, 23);
+            this.clusterButton.Size = new System.Drawing.Size(120, 25);
             this.clusterButton.TabIndex = 0;
-            this.clusterButton.Text = "Clusterize";
+            this.clusterButton.Text = "Hierarchical Clustering";
             this.clusterButton.UseVisualStyleBackColor = true;
             this.clusterButton.Click += new System.EventHandler(this.clusterButton_Click);
             // 
@@ -62,7 +66,7 @@
             this.trvResultTree.Location = new System.Drawing.Point(12, 12);
             this.trvResultTree.Name = "trvResultTree";
             this.trvResultTree.SelectedImageIndex = 0;
-            this.trvResultTree.Size = new System.Drawing.Size(711, 565);
+            this.trvResultTree.Size = new System.Drawing.Size(711, 525);
             this.trvResultTree.TabIndex = 1;
             // 
             // imageList1
@@ -73,16 +77,57 @@
             this.imageList1.Images.SetKeyName(1, "function.png");
             this.imageList1.Images.SetKeyName(2, "Folder.png");
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 579);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Number of clusters:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(603, 574);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "K-Means Clustering";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(153, 577);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(60, 20);
+            this.numericUpDown1.TabIndex = 4;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
             // ClusterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(735, 635);
+            this.ClientSize = new System.Drawing.Size(735, 605);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.trvResultTree);
             this.Controls.Add(this.clusterButton);
             this.Name = "ClusterForm";
             this.Text = "Software Reengineering - Lab 3";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -93,6 +138,9 @@
         private System.Windows.Forms.SaveFileDialog saveResult;
         private System.Windows.Forms.TreeView trvResultTree;
         private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
 

@@ -23,6 +23,12 @@ namespace software_reeingneering_clustering
 
         private void clusterButton_Click(object sender, EventArgs e)
         {
+            IClustering clustering = new AgglomerativeHierarchicalClustering();
+            Clustering(clustering);
+        }
+
+        private void Clustering(IClustering clusterAlgorithm)
+        {
             DialogResult dialogResult = openClassMethodsFile.ShowDialog();
             if (dialogResult == DialogResult.OK)
             {
@@ -32,11 +38,7 @@ namespace software_reeingneering_clustering
 
                 List<INode> clusters = initializeClusters(rawClasses);
 
-                //IClustering clustering = new AgglomerativeHierarchicalClustering();
-
-                IClustering clustering = new KMeansClustering(5);
-
-                List<INode> clustered = clustering.Clusterize(clusters);
+                List<INode> clustered = clusterAlgorithm.Clusterize(clusters);
 
                 ReloadTree(clustered[0]);
             }
@@ -89,6 +91,15 @@ namespace software_reeingneering_clustering
             }
 
             return node;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int clusterNumber = (int)numericUpDown1.Value;
+
+            IClustering clustering = new KMeansClustering(clusterNumber);
+
+            Clustering(clustering);
         }
     }
 }
